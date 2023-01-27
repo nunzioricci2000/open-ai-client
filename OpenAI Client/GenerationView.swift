@@ -8,31 +8,50 @@
 import SwiftUI
 import OpenAISwift
 
+let token = "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"
+let token0 = "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"
+
 struct GenerationView: View {
-    let openAi = OpenAISwift(authToken: "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")
+    let openAi = OpenAISwift(authToken: token)
     @State var choices: [Choice] = []
     @State var requestText: String = ""
     var body: some View {
         NavigationStack {
-            List {
-                TextField("Once up on a time...", text: $requestText)
-                Button("Generate") {
-                    openAi.sendCompletion(with: requestText) { response in
-                        switch response {
-                        case .success(let success):
-                            choices = success.choices
-                        case .failure(let failure):
-                            fatalError(failure.localizedDescription)
-                        }
+            ScrollView {
+                TextField("Once up on a time...", text: $requestText, axis: .vertical)
+                    .lineLimit(7)
+                    .textFieldStyle(.roundedBorder)
+                HStack {
+                    Spacer()
+                    Button {
+                            openAi.sendCompletion(with: requestText) { response in
+                                switch response {
+                                case .success(let success):
+                                    withAnimation {
+                                        choices = success.choices
+                                    }
+                                case .failure(let failure):
+                                    fatalError(failure.localizedDescription)
+                                }
+                            }
+                    } label: {
+                        Image(systemName: "paperplane")
                     }
+                    .buttonStyle(.borderedProminent)
                 }
                 ForEach(choices, id: \.text) { choice in
-                    Text(choice.text)
+                    Text(choice.text).transition(.push(from: .top))
                 }
             }
-            .listStyle(.grouped)
-            .navigationTitle("OpenAI Client")
+            .padding()
+            .navigationTitle("Generate")
         }
+    }
+}
+
+extension GenerationView {
+    class ViewModel: ObservableObject {
+        
     }
 }
 
