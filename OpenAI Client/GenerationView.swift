@@ -12,46 +12,78 @@ let token = "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"
 let token0 = "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"
 
 struct GenerationView: View {
-    let openAi = OpenAISwift(authToken: token)
-    @State var choices: [Choice] = []
-    @State var requestText: String = ""
+    @StateObject var viewModel = ViewModel()
     var body: some View {
         NavigationStack {
             ScrollView {
-                TextField("Once up on a time...", text: $requestText, axis: .vertical)
+                TextField("Once up on a time...", text: $viewModel.requestText, axis: .vertical)
                     .lineLimit(7)
                     .textFieldStyle(.roundedBorder)
                 HStack {
                     Spacer()
                     Button {
-                            openAi.sendCompletion(with: requestText) { response in
-                                switch response {
-                                case .success(let success):
-                                    withAnimation {
-                                        choices = success.choices
-                                    }
-                                case .failure(let failure):
-                                    fatalError(failure.localizedDescription)
-                                }
-                            }
+                        Task {
+                            await viewModel.performRequest()
+                        }
                     } label: {
                         Image(systemName: "paperplane")
                     }
                     .buttonStyle(.borderedProminent)
+                    .disabled(viewModel.fetchingData)
                 }
-                ForEach(choices, id: \.text) { choice in
-                    Text(choice.text).transition(.push(from: .top))
+                ForEach(viewModel.choices, id: \.self) { choice in
+                    Text(choice).transition(.scale)
                 }
             }
             .padding()
             .navigationTitle("Generate")
+        }.onAppear {
+            NetworkManager.shared.token = token
         }
     }
 }
 
 extension GenerationView {
+    @MainActor
     class ViewModel: ObservableObject {
+        let openAi = OpenAISwift(authToken: token)
+        @Published var choices: [String] = []
+        @Published var requestText: String = ""
+        @Published var fetchingData: Bool = false
         
+        init() {
+            
+        }
+        
+        func performRequest() async {
+            reportStartFetching()
+            do {
+                set(choices: try await NetworkManager.shared.perform(request: requestText))
+            } catch {
+                switch error {
+                default: fatalError("error not handled: \(error.localizedDescription)")
+                }
+            }
+            reportEndFetching()
+        }
+        
+        func reportStartFetching() {
+            withAnimation {
+                fetchingData = true
+            }
+        }
+        
+        func reportEndFetching() {
+            withAnimation {
+                fetchingData = false
+            }
+        }
+        
+        func set(choices: [String]) {
+            withAnimation {
+                self.choices = choices
+            }
+        }
     }
 }
 
