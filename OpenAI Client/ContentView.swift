@@ -6,16 +6,17 @@
 //
 
 import SwiftUI
+import OpenAISwift
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        TabView {
+            GenerationView()
+                .tabItem {
+                    Image(systemName: "terminal")
+                    Text("Generete")
+                }
         }
-        .padding()
     }
 }
 
