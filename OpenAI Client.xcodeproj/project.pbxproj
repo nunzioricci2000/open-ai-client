@@ -10,6 +10,7 @@
 		CD3AE7A1298428F1002C5D0E /* OpenAISwift in Frameworks */ = {isa = PBXBuildFile; productRef = CD3AE7A0298428F1002C5D0E /* OpenAISwift */; };
 		CD3AE7A329846FDB002C5D0E /* GenerationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3AE7A229846FDB002C5D0E /* GenerationView.swift */; };
 		CD3AE7A52984777C002C5D0E /* PersistencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3AE7A42984777C002C5D0E /* PersistencyManager.swift */; };
+		CD3AE7A729847FBC002C5D0E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3AE7A629847FBC002C5D0E /* NetworkManager.swift */; };
 		CD94CAF8298425DE0038C470 /* OpenAI_ClientApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD94CAF7298425DE0038C470 /* OpenAI_ClientApp.swift */; };
 		CD94CAFA298425DE0038C470 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD94CAF9298425DE0038C470 /* ContentView.swift */; };
 		CD94CAFC298425DF0038C470 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD94CAFB298425DF0038C470 /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 /* Begin PBXFileReference section */
 		CD3AE7A229846FDB002C5D0E /* GenerationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationView.swift; sourceTree = "<group>"; };
 		CD3AE7A42984777C002C5D0E /* PersistencyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistencyManager.swift; sourceTree = "<group>"; };
+		CD3AE7A629847FBC002C5D0E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		CD94CAF4298425DE0038C470 /* OpenAI Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OpenAI Client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD94CAF7298425DE0038C470 /* OpenAI_ClientApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAI_ClientApp.swift; sourceTree = "<group>"; };
 		CD94CAF9298425DE0038C470 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				CD94CAFD298425DF0038C470 /* Preview Content */,
 				CD3AE7A229846FDB002C5D0E /* GenerationView.swift */,
 				CD3AE7A42984777C002C5D0E /* PersistencyManager.swift */,
+				CD3AE7A629847FBC002C5D0E /* NetworkManager.swift */,
 			);
 			path = "OpenAI Client";
 			sourceTree = "<group>";
@@ -153,6 +156,7 @@
 			files = (
 				CD3AE7A329846FDB002C5D0E /* GenerationView.swift in Sources */,
 				CD94CAFA298425DE0038C470 /* ContentView.swift in Sources */,
+				CD3AE7A729847FBC002C5D0E /* NetworkManager.swift in Sources */,
 				CD94CAF8298425DE0038C470 /* OpenAI_ClientApp.swift in Sources */,
 				CD3AE7A52984777C002C5D0E /* PersistencyManager.swift in Sources */,
 			);
