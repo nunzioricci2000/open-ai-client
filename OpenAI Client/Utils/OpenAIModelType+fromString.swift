@@ -17,7 +17,20 @@ extension OpenAIModelType {
         }
         throw CustomOpenAIError.decodingError
     }
+    
+    var engine: OpenAIModelProtocol {
+        let string = self.modelName
+        if let gpt = Self.GPT3.init(rawValue: string) {
+            return gpt
+        }
+        return Self.Codex.init(rawValue: string)!
+    }
 }
+
+protocol OpenAIModelProtocol {}
+
+extension OpenAIModelType.GPT3: OpenAIModelProtocol {}
+extension OpenAIModelType.Codex: OpenAIModelProtocol {}
 
 enum CustomOpenAIError: Error{
     case decodingError

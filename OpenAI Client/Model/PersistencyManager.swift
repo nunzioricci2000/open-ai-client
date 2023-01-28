@@ -37,7 +37,7 @@ class PersistencyManager {
     }
     
     func save(length: Int) {
-        UserDefaults.standard.set(length, forKey: SettingsKey.engine.rawValue)
+        UserDefaults.standard.set(length, forKey: SettingsKey.length.rawValue)
     }
     
     func loadLength() throws -> Int {

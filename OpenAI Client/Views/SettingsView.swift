@@ -43,7 +43,11 @@ struct SettingsView: View {
             }
             .navigationTitle("Settings")
             .navigationDestination(for: Page.self) { page in
-                Color.blue
+                switch page {
+                case .token: TokenSettingsView()
+                case .engine: EngineSettingsView()
+                case .length: LengthSettingsView()
+                }
             }
         }
     }
