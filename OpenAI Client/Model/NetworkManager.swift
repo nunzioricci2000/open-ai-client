@@ -12,10 +12,7 @@ class NetworkManager {
     static var shared: NetworkManager = .init()
     private init() {}
     
-    var token: String?
-    
-    func perform(request: String) async throws -> [String] {
-        guard let token = token else { throw NetworkError.nilToken }
+    func perform(request: String, withToken token: String) async throws -> [String] {
         let openAi = OpenAISwift(authToken: token)
         let response = try await openAi.sendCompletion(with: request)
         return response.choices.map { $0.text }
