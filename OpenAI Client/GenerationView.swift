@@ -15,12 +15,10 @@ struct GenerationView: View {
     @StateObject var viewModel = ViewModel()
     var body: some View {
         NavigationStack {
-            ScrollView {
-                TextField("Once up on a time...", text: $viewModel.requestText, axis: .vertical)
-                    .lineLimit(7)
-                    .textFieldStyle(.roundedBorder)
+            List {
                 HStack {
-                    Spacer()
+                    TextField("Once up on a time...", text: $viewModel.requestText, axis: .vertical)
+                        .lineLimit(7)
                     Button {
                         Task {
                             await viewModel.performRequest()
@@ -31,11 +29,12 @@ struct GenerationView: View {
                     .buttonStyle(.borderedProminent)
                     .disabled(viewModel.fetchingData)
                 }
-                ForEach(viewModel.choices, id: \.self) { choice in
-                    Text(choice).transition(.scale)
+                Section(viewModel.choices.isEmpty ? "" : "Results") {
+                    ForEach(viewModel.choices, id: \.self) { choice in
+                        Text(choice).transition(.scale)
+                    }
                 }
             }
-            .padding()
             .navigationTitle("Generate")
         }.onAppear {
             NetworkManager.shared.token = token
@@ -51,9 +50,11 @@ extension GenerationView {
         @Published var requestText: String = ""
         @Published var fetchingData: Bool = false
         
-        init() {
-            
+        /*
+        func boh() {
+            openAi.sendCompletion(with: <#T##String#>, model: <#T##OpenAIModelType#>, maxTokens: <#T##Int#>, completionHandler: <#T##(Result<OpenAI, OpenAIError>) -> Void#>)
         }
+        */
         
         func performRequest() async {
             reportStartFetching()

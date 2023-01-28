@@ -13,8 +13,15 @@ struct ContentView: View {
         TabView {
             GenerationView()
                 .tabItem {
-                    Image(systemName: "terminal")
-                    Text("Generete")
+                    Label("Generete", systemImage: "terminal")
+                }
+            HistoryView()
+                .tabItem {
+                    Label("History", systemImage: "list.bullet")
+                }
+            SettingsView()
+                .tabItem {
+                    Label("Settings", systemImage: "gear")
                 }
         }
     }
