@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @State var path: [SettingsPage] = []
+    @StateObject var viewModel = ViewModel()
     
     var body: some View {
-        NavigationStack(path: $path) {
+        NavigationStack(path: $viewModel.path) {
             List {
-                NavigationLink(value: SettingsPage.token) {
+                NavigationLink(value: Page.token) {
                     HStack {
                         Image(systemName: "curlybraces")
                         Text("Token")
@@ -22,7 +22,7 @@ struct SettingsView: View {
                             .foregroundColor(.secondary)
                     }
                 }
-                NavigationLink(value: SettingsPage.engine) {
+                NavigationLink(value: Page.engine) {
                     HStack {
                         Image(systemName: "gearshape.2")
                         Text("Engine")
@@ -31,10 +31,10 @@ struct SettingsView: View {
                             .foregroundColor(.secondary)
                     }
                 }
-                NavigationLink(value: SettingsPage.lengh) {
+                NavigationLink(value: Page.length) {
                     HStack {
                         Image(systemName: "character.cursor.ibeam")
-                        Text("Max response lengh")
+                        Text("Max response length")
                         Spacer()
                         Text("16")
                             .foregroundColor(.secondary)
@@ -42,17 +42,23 @@ struct SettingsView: View {
                 }
             }
             .navigationTitle("Settings")
-            .navigationDestination(for: SettingsPage.self) { page in
+            .navigationDestination(for: Page.self) { page in
                 Color.blue
             }
         }
     }
 }
 
-enum SettingsPage {
-    case token
-    case engine
-    case lengh
+extension SettingsView {
+    class ViewModel: ObservableObject {
+        @Published var path: [Page] = []
+    }
+    
+    enum Page {
+        case token
+        case engine
+        case length
+    }
 }
 
 struct SettingsView_Previews: PreviewProvider {

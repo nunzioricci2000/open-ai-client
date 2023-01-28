@@ -13,6 +13,8 @@
 		CD3AE7A729847FBC002C5D0E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3AE7A629847FBC002C5D0E /* NetworkManager.swift */; };
 		CD3AE7A929849341002C5D0E /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3AE7A829849341002C5D0E /* HistoryView.swift */; };
 		CD3AE7AB2984938C002C5D0E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3AE7AA2984938C002C5D0E /* SettingsView.swift */; };
+		CD3AE7AE29851310002C5D0E /* OpenAIModelType+fromString.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3AE7AD29851310002C5D0E /* OpenAIModelType+fromString.swift */; };
+		CD3AE7B329851AE1002C5D0E /* TokenSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3AE7B229851AE1002C5D0E /* TokenSettingsView.swift */; };
 		CD94CAF8298425DE0038C470 /* OpenAI_ClientApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD94CAF7298425DE0038C470 /* OpenAI_ClientApp.swift */; };
 		CD94CAFA298425DE0038C470 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD94CAF9298425DE0038C470 /* ContentView.swift */; };
 		CD94CAFC298425DF0038C470 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD94CAFB298425DF0038C470 /* Assets.xcassets */; };
@@ -25,6 +27,8 @@
 		CD3AE7A629847FBC002C5D0E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		CD3AE7A829849341002C5D0E /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		CD3AE7AA2984938C002C5D0E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		CD3AE7AD29851310002C5D0E /* OpenAIModelType+fromString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpenAIModelType+fromString.swift"; sourceTree = "<group>"; };
+		CD3AE7B229851AE1002C5D0E /* TokenSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenSettingsView.swift; sourceTree = "<group>"; };
 		CD94CAF4298425DE0038C470 /* OpenAI Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OpenAI Client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD94CAF7298425DE0038C470 /* OpenAI_ClientApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAI_ClientApp.swift; sourceTree = "<group>"; };
 		CD94CAF9298425DE0038C470 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -44,6 +48,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CD3AE7AC298512CB002C5D0E /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				CD3AE7AD29851310002C5D0E /* OpenAIModelType+fromString.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		CD3AE7AF29851A44002C5D0E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CD94CAF9298425DE0038C470 /* ContentView.swift */,
+				CD3AE7A229846FDB002C5D0E /* GenerationView.swift */,
+				CD3AE7A829849341002C5D0E /* HistoryView.swift */,
+				CD3AE7AA2984938C002C5D0E /* SettingsView.swift */,
+				CD3AE7B029851A6A002C5D0E /* Settings */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CD3AE7B029851A6A002C5D0E /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				CD3AE7B229851AE1002C5D0E /* TokenSettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		CD3AE7B129851AAA002C5D0E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CD3AE7A629847FBC002C5D0E /* NetworkManager.swift */,
+				CD3AE7A42984777C002C5D0E /* PersistencyManager.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		CD94CAEB298425DE0038C470 = {
 			isa = PBXGroup;
 			children = (
@@ -63,15 +104,12 @@
 		CD94CAF6298425DE0038C470 /* OpenAI Client */ = {
 			isa = PBXGroup;
 			children = (
+				CD3AE7B129851AAA002C5D0E /* Model */,
+				CD3AE7AC298512CB002C5D0E /* Utils */,
+				CD3AE7AF29851A44002C5D0E /* Views */,
 				CD94CAF7298425DE0038C470 /* OpenAI_ClientApp.swift */,
-				CD94CAF9298425DE0038C470 /* ContentView.swift */,
 				CD94CAFB298425DF0038C470 /* Assets.xcassets */,
 				CD94CAFD298425DF0038C470 /* Preview Content */,
-				CD3AE7A229846FDB002C5D0E /* GenerationView.swift */,
-				CD3AE7A42984777C002C5D0E /* PersistencyManager.swift */,
-				CD3AE7A629847FBC002C5D0E /* NetworkManager.swift */,
-				CD3AE7A829849341002C5D0E /* HistoryView.swift */,
-				CD3AE7AA2984938C002C5D0E /* SettingsView.swift */,
 			);
 			path = "OpenAI Client";
 			sourceTree = "<group>";
@@ -160,12 +198,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD3AE7AE29851310002C5D0E /* OpenAIModelType+fromString.swift in Sources */,
 				CD3AE7AB2984938C002C5D0E /* SettingsView.swift in Sources */,
 				CD3AE7A329846FDB002C5D0E /* GenerationView.swift in Sources */,
 				CD3AE7A929849341002C5D0E /* HistoryView.swift in Sources */,
 				CD94CAFA298425DE0038C470 /* ContentView.swift in Sources */,
 				CD3AE7A729847FBC002C5D0E /* NetworkManager.swift in Sources */,
 				CD94CAF8298425DE0038C470 /* OpenAI_ClientApp.swift in Sources */,
+				CD3AE7B329851AE1002C5D0E /* TokenSettingsView.swift in Sources */,
 				CD3AE7A52984777C002C5D0E /* PersistencyManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
