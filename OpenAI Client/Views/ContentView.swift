@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import OpenAISwift
 
 struct ContentView: View {
     var body: some View {

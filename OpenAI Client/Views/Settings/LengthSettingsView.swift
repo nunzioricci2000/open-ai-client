@@ -11,16 +11,11 @@ struct LengthSettingsView: View {
     @StateObject var viewModel = ViewModel()
     @Environment(\.dismiss) var dismiss
     
-    let formatter: NumberFormatter = {
-            let formatter = NumberFormatter()
-            formatter.numberStyle = .decimal
-            return formatter
-        }()
-    
     var body: some View {
         List {
             HStack {
-                TextField("16", value: $viewModel.length, formatter: formatter)
+                TextField("Max length", text: $viewModel.length)
+                    .keyboardType(.decimalPad)
                 Button("Done") {
                     viewModel.saveLength()
                 }
@@ -38,13 +33,13 @@ struct LengthSettingsView: View {
 
 extension LengthSettingsView {
     class ViewModel: ObservableObject {
-        @Published var length: Int = 16
+        @Published var length: String = ""
         @Published var errorLabel: String?
         var dismiss: DismissAction?
         
         init() {
             do {
-                length = try PersistencyManager.shared.loadLength()
+                length = String(try PersistencyManager.shared.loadLength())
             } catch {
                 print(error)
             }
@@ -53,6 +48,10 @@ extension LengthSettingsView {
         func saveLength() {
             guard let dismiss = dismiss else {
                 fatalError("dismiss not setted!")
+            }
+            guard let length = Int(length) else {
+                errorLabel = "Length MUST be a number"
+                return
             }
             guard length > 0 else {
                 errorLabel = "Length MUST be greater then zero"
