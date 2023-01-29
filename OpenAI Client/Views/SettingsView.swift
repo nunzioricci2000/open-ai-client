@@ -6,25 +6,29 @@
 //
 
 import SwiftUI
+import OpenAISwift
 
 struct SettingsView: View {
-    @StateObject var viewModel = ViewModel()
+    @AppStorage("token") var token: String = "No token!"
+    @AppStorage("engine") var engine: String = OpenAIModelType.gpt3(.davinci).modelName
+    @AppStorage("length") var length: Int = 16
+    @State var path: [Page] = []
     
     var body: some View {
-        NavigationStack(path: $viewModel.path) {
+        NavigationStack(path: $path) {
             List {
                 settingsPage("Token",
                              link: .token,
                              systemName: "curlybraces",
-                             secondaryText: viewModel.tokenPreview)
+                             secondaryText: tokenPreview)
                 settingsPage("Engine",
                              link: .engine,
                              systemName: "gearshape.2",
-                             secondaryText: viewModel.enginePreview)
+                             secondaryText: enginePreview)
                 settingsPage("Max response length",
                              link: .length,
                              systemName: "character.cursor.ibeam",
-                             secondaryText: viewModel.lengthPreview)
+                             secondaryText: lengthPreview)
             }
             .navigationTitle("Settings")
             .navigationDestination(for: Page.self) { page in
@@ -57,61 +61,45 @@ struct SettingsView: View {
 }
 
 extension SettingsView {
-    class ViewModel: ObservableObject {
-        @Published var path: [Page] = []
-        var tokenPreview: String {
-            do {
-                let token = try PersistencyManager.shared.loadToken()
-                let prefixEndIndex = token.index(token.startIndex, offsetBy: 3)
-                let suffixStartIndex = token.index(token.endIndex, offsetBy: -2)
-                let previewPrefix = token[..<prefixEndIndex]
-                let previewSuffix = token[suffixStartIndex...]
-                return previewPrefix + "..." + previewSuffix
-            } catch {
-                print(error)
-            }
-            return "No token!"
+    var tokenPreview: String {
+        let prefixEndIndex = token.index(token.startIndex, offsetBy: 3)
+        let suffixStartIndex = token.index(token.endIndex, offsetBy: -2)
+        let previewPrefix = token[..<prefixEndIndex]
+        let previewSuffix = token[suffixStartIndex...]
+        return String(previewPrefix + "..." + previewSuffix)
+    }
+    
+    var enginePreview: String {
+        let current = engine
+        let model: String
+        let engine: String
+        switch current {
+        case OpenAIModelType.gpt3(.ada).modelName:
+            model = "GPT3"
+            engine = "Ada"
+        case OpenAIModelType.gpt3(.babbage).modelName:
+            model = "GPT3"
+            engine = "Babbage"
+        case OpenAIModelType.gpt3(.curie).modelName:
+            model = "GPT3"
+            engine = "Curie"
+        case OpenAIModelType.gpt3(.davinci).modelName:
+            model = "GPT3"
+            engine = "Davinci"
+        case OpenAIModelType.codex(.cushman).modelName:
+            model = "Codex"
+            engine = "Cushman"
+        case OpenAIModelType.codex(.davinci).modelName:
+            model = "Codex"
+            engine = "Davinci"
+        default:
+            fatalError("Unknown engine: \(current)")
         }
-        var enginePreview: String {
-            do {
-                let current = try PersistencyManager.shared.loadEngine()
-                let model: String
-                let engine: String
-                switch current {
-                case .gpt3(.ada):
-                    model = "GPT3"
-                    engine = "Ada"
-                case .gpt3(.babbage):
-                    model = "GPT3"
-                    engine = "Babbage"
-                case .gpt3(.curie):
-                    model = "GPT3"
-                    engine = "Curie"
-                case .gpt3(.davinci):
-                    model = "GPT3"
-                    engine = "Davinci"
-                case .codex(.cushman):
-                    model = "Codex"
-                    engine = "Cushman"
-                case .codex(.davinci):
-                    model = "Codex"
-                    engine = "Davinci"
-                }
-                return "\(model) \(engine)"
-            } catch {
-                print(error)
-            }
-            return "No engine!"
-        }
-        var lengthPreview: String {
-            do {
-                let length = try PersistencyManager.shared.loadLength()
-                return "\(length)"
-            } catch {
-                print(error)
-            }
-            return "No length!"
-        }
+        return "\(model) \(engine)"
+    }
+    
+    var lengthPreview: String {
+        return "\(length)"
     }
     
     enum Page {

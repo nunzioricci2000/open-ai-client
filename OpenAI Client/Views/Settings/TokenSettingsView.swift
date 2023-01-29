@@ -8,46 +8,36 @@
 import SwiftUI
 
 struct TokenSettingsView: View {
-    @StateObject var viewModel = ViewModel()
     @Environment(\.dismiss) var dismiss
+    @AppStorage("token") var token: String = ""
+    @State var errorLabel: String?
+    @State var text: String = ""
     
     var body: some View {
         List {
             HStack {
-                TextField("Your token here", text: $viewModel.token)
+                TextField("Your token here", text: $text)
                 Button("Done") {
-                    viewModel.saveToken()
+                    saveToken()
                 }
             }
-            if let errorLabel = viewModel.errorLabel {
+            if let errorLabel = errorLabel {
                 Text(errorLabel)
                     .foregroundColor(.red)
             }
         }.navigationTitle("Token")
-            .onAppear {
-                viewModel.dismiss = dismiss
-            }
             .scrollDismissesKeyboard(.immediately)
     }
 }
 
 extension TokenSettingsView {
-    class ViewModel: ObservableObject {
-        @Published var token: String = ""
-        @Published var errorLabel: String?
-        var dismiss: DismissAction?
-        
-        func saveToken() {
-            guard let dismiss = dismiss else {
-                fatalError("dismiss not setted!")
-            }
-            guard token.hasPrefix("sk-") else {
-                errorLabel = "token not valid!"
-                return
-            }
-            PersistencyManager.shared.save(token: token)
-            dismiss()
+    func saveToken() {
+        guard text.hasPrefix("sk-") else {
+            errorLabel = "token not valid!"
+            return
         }
+        token = text
+        dismiss()
     }
 }
 

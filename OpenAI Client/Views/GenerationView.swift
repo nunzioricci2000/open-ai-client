@@ -9,29 +9,35 @@ import SwiftUI
 import OpenAISwift
 
 struct GenerationView: View {
-    @StateObject var viewModel = ViewModel()
+    @AppStorage("token") var token: String = "No token!"
+    @State var choices: [String] = []
+    @State var errorMessage: String?
+    @State var requestText: String = ""
+    @State var fetchingData: Bool = false
+    @State var lastRequestText: String = ""
+    
     var body: some View {
         NavigationStack {
             List {
                 HStack {
-                    TextField("Once up on a time...", text: $viewModel.requestText, axis: .vertical)
+                    TextField("Once up on a time...", text: $requestText, axis: .vertical)
                         .lineLimit(7)
                     Button {
                         Task {
-                            await viewModel.performRequest()
+                            await performRequest()
                         }
                     } label: {
                         Image(systemName: "paperplane")
                     }
                     .buttonStyle(.borderedProminent)
-                    .disabled(viewModel.fetchingData)
+                    .disabled(fetchingData)
                 }
-                if let errorMessage = viewModel.errorMessage {
+                if let errorMessage = errorMessage {
                     Text(errorMessage)
                 }
-                Section(viewModel.choices.isEmpty ? "" : "Results") {
-                    ForEach(viewModel.choices, id: \.self) { choice in
-                        Text(choice).transition(.scale)
+                Section(choices.isEmpty ? "" : "Results") {
+                    ForEach(choices, id: \.self) { choice in
+                        Text("**\(lastRequestText)**\(choice)").transition(.scale)
                     }
                 }
             }
@@ -42,50 +48,40 @@ struct GenerationView: View {
 }
 
 extension GenerationView {
-    @MainActor
-    class ViewModel: ObservableObject {
-        var token: String {
-            (try? PersistencyManager.shared.loadToken()) ?? ""
-        }
-        @Published var choices: [String] = []
-        @Published var errorMessage: String?
-        @Published var requestText: String = ""
-        @Published var fetchingData: Bool = false
-        
-        func performRequest() async {
-            reportStartFetching()
-            do {
-                set(choices: try await NetworkManager.shared.perform(request: requestText, withToken: token))
-                _ = PersistencyManager.shared.save(request: requestText, response: choices)
-            } catch {
-                switch error {
-                case OpenAIError.genericError(let nestedError):
-                    errorMessage = nestedError.localizedDescription
-                case OpenAIError.decodingError(let nestedError):
-                    errorMessage = nestedError.localizedDescription
-                default: fatalError("error not handled: \(error.localizedDescription)")
-                }
-            }
-            reportEndFetching()
-        }
-        
-        func reportStartFetching() {
-            withAnimation {
-                errorMessage = nil
-                fetchingData = true
+    func performRequest() async {
+        lastRequestText = requestText
+        reportStartFetching()
+        do {
+            set(choices: try await NetworkManager.shared.perform(request: requestText, withToken: token))
+            _ = PersistencyManager.shared.save(request: requestText, response: choices)
+        } catch {
+            switch error {
+            case OpenAIError.genericError(let nestedError):
+                errorMessage = nestedError.localizedDescription
+            case OpenAIError.decodingError(let nestedError):
+                errorMessage = nestedError.localizedDescription
+            default: fatalError("error not handled: \(error.localizedDescription)")
             }
         }
-        
-        func reportEndFetching() {
-            withAnimation {
-                fetchingData = false
-            }
+        reportEndFetching()
+    }
+    
+    func reportStartFetching() {
+        withAnimation {
+            errorMessage = nil
+            fetchingData = true
         }
-        
-        func set(choices: [String]) {
-            withAnimation {
-                self.choices = choices
-            }
+    }
+    
+    func reportEndFetching() {
+        withAnimation {
+            fetchingData = false
+        }
+    }
+    
+    func set(choices: [String]) {
+        withAnimation {
+            self.choices = choices
         }
     }
 }

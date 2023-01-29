@@ -89,9 +89,9 @@
 		CD3AE7B129851AAA002C5D0E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CD3AE7B8298585CE002C5D0E /* Model.xcdatamodeld */,
 				CD3AE7A629847FBC002C5D0E /* NetworkManager.swift */,
 				CD3AE7A42984777C002C5D0E /* PersistencyManager.swift */,
-				CD3AE7B8298585CE002C5D0E /* Model.xcdatamodeld */,
 				CD3AE7BB2985C44B002C5D0E /* HRequest.swift */,
 			);
 			path = Model;
