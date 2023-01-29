@@ -27,6 +27,7 @@ struct TokenSettingsView: View {
             .onAppear {
                 viewModel.dismiss = dismiss
             }
+            .scrollDismissesKeyboard(.immediately)
     }
 }
 

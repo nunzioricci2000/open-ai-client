@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct LengthSettingsView: View {
     @StateObject var viewModel = ViewModel()
@@ -16,6 +17,12 @@ struct LengthSettingsView: View {
             HStack {
                 TextField("Max length", text: $viewModel.length)
                     .keyboardType(.decimalPad)
+                    .onReceive(Just(viewModel.length)) { newValue in
+                                    let filtered = newValue.filter { "0123456789".contains($0) }
+                                    if filtered != newValue {
+                                        self.viewModel.length = filtered
+                                    }
+                                }
                 Button("Done") {
                     viewModel.saveLength()
                 }
@@ -28,6 +35,7 @@ struct LengthSettingsView: View {
             .onAppear {
                 viewModel.dismiss = dismiss
             }
+            .scrollDismissesKeyboard(.immediately)
     }
 }
 

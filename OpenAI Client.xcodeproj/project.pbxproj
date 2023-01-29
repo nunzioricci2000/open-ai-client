@@ -17,6 +17,8 @@
 		CD3AE7B329851AE1002C5D0E /* TokenSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3AE7B229851AE1002C5D0E /* TokenSettingsView.swift */; };
 		CD3AE7B529851C63002C5D0E /* EngineSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3AE7B429851C63002C5D0E /* EngineSettingsView.swift */; };
 		CD3AE7B729851C86002C5D0E /* LengthSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3AE7B629851C86002C5D0E /* LengthSettingsView.swift */; };
+		CD3AE7BA298585CE002C5D0E /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CD3AE7B8298585CE002C5D0E /* Model.xcdatamodeld */; };
+		CD3AE7BC2985C44B002C5D0E /* HRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3AE7BB2985C44B002C5D0E /* HRequest.swift */; };
 		CD94CAF8298425DE0038C470 /* OpenAI_ClientApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD94CAF7298425DE0038C470 /* OpenAI_ClientApp.swift */; };
 		CD94CAFA298425DE0038C470 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD94CAF9298425DE0038C470 /* ContentView.swift */; };
 		CD94CAFC298425DF0038C470 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD94CAFB298425DF0038C470 /* Assets.xcassets */; };
@@ -33,6 +35,8 @@
 		CD3AE7B229851AE1002C5D0E /* TokenSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenSettingsView.swift; sourceTree = "<group>"; };
 		CD3AE7B429851C63002C5D0E /* EngineSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineSettingsView.swift; sourceTree = "<group>"; };
 		CD3AE7B629851C86002C5D0E /* LengthSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LengthSettingsView.swift; sourceTree = "<group>"; };
+		CD3AE7B9298585CE002C5D0E /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		CD3AE7BB2985C44B002C5D0E /* HRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HRequest.swift; sourceTree = "<group>"; };
 		CD94CAF4298425DE0038C470 /* OpenAI Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OpenAI Client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD94CAF7298425DE0038C470 /* OpenAI_ClientApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAI_ClientApp.swift; sourceTree = "<group>"; };
 		CD94CAF9298425DE0038C470 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -87,6 +91,8 @@
 			children = (
 				CD3AE7A629847FBC002C5D0E /* NetworkManager.swift */,
 				CD3AE7A42984777C002C5D0E /* PersistencyManager.swift */,
+				CD3AE7B8298585CE002C5D0E /* Model.xcdatamodeld */,
+				CD3AE7BB2985C44B002C5D0E /* HRequest.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -215,6 +221,8 @@
 				CD94CAF8298425DE0038C470 /* OpenAI_ClientApp.swift in Sources */,
 				CD3AE7B329851AE1002C5D0E /* TokenSettingsView.swift in Sources */,
 				CD3AE7A52984777C002C5D0E /* PersistencyManager.swift in Sources */,
+				CD3AE7BC2985C44B002C5D0E /* HRequest.swift in Sources */,
+				CD3AE7BA298585CE002C5D0E /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,6 +442,19 @@
 			productName = OpenAISwift;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		CD3AE7B8298585CE002C5D0E /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CD3AE7B9298585CE002C5D0E /* Model.xcdatamodel */,
+			);
+			currentVersion = CD3AE7B9298585CE002C5D0E /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = CD94CAEC298425DE0038C470 /* Project object */;
 }

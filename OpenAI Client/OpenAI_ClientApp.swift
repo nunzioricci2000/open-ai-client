@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct OpenAI_ClientApp: App {
+    @State var persistencyManager: PersistencyManager = .shared
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(\.managedObjectContext, persistencyManager.persistentContainer.viewContext)
         }
     }
 }

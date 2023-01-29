@@ -36,6 +36,7 @@ struct GenerationView: View {
                 }
             }
             .navigationTitle("Generate")
+            .scrollDismissesKeyboard(.immediately)
         }
     }
 }
@@ -55,6 +56,7 @@ extension GenerationView {
             reportStartFetching()
             do {
                 set(choices: try await NetworkManager.shared.perform(request: requestText, withToken: token))
+                _ = PersistencyManager.shared.save(request: requestText, response: choices)
             } catch {
                 switch error {
                 case OpenAIError.genericError(let nestedError):
