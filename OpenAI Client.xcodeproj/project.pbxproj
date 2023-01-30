@@ -19,6 +19,9 @@
 		CD3AE7B729851C86002C5D0E /* LengthSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3AE7B629851C86002C5D0E /* LengthSettingsView.swift */; };
 		CD3AE7BA298585CE002C5D0E /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CD3AE7B8298585CE002C5D0E /* Model.xcdatamodeld */; };
 		CD3AE7BC2985C44B002C5D0E /* HRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3AE7BB2985C44B002C5D0E /* HRequest.swift */; };
+		CD3AE7C32986E2BB002C5D0E /* DetailHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3AE7C22986E2BB002C5D0E /* DetailHistoryView.swift */; };
+		CD58D35329871919008D6903 /* ListHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD58D35229871919008D6903 /* ListHistoryView.swift */; };
+		CD58D35529872243008D6903 /* Clippable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD58D35429872243008D6903 /* Clippable.swift */; };
 		CD94CAF8298425DE0038C470 /* OpenAI_ClientApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD94CAF7298425DE0038C470 /* OpenAI_ClientApp.swift */; };
 		CD94CAFA298425DE0038C470 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD94CAF9298425DE0038C470 /* ContentView.swift */; };
 		CD94CAFC298425DF0038C470 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD94CAFB298425DF0038C470 /* Assets.xcassets */; };
@@ -37,6 +40,9 @@
 		CD3AE7B629851C86002C5D0E /* LengthSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LengthSettingsView.swift; sourceTree = "<group>"; };
 		CD3AE7B9298585CE002C5D0E /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		CD3AE7BB2985C44B002C5D0E /* HRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HRequest.swift; sourceTree = "<group>"; };
+		CD3AE7C22986E2BB002C5D0E /* DetailHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHistoryView.swift; sourceTree = "<group>"; };
+		CD58D35229871919008D6903 /* ListHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListHistoryView.swift; sourceTree = "<group>"; };
+		CD58D35429872243008D6903 /* Clippable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clippable.swift; sourceTree = "<group>"; };
 		CD94CAF4298425DE0038C470 /* OpenAI Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OpenAI Client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD94CAF7298425DE0038C470 /* OpenAI_ClientApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAI_ClientApp.swift; sourceTree = "<group>"; };
 		CD94CAF9298425DE0038C470 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -70,6 +76,8 @@
 				CD94CAF9298425DE0038C470 /* ContentView.swift */,
 				CD3AE7A229846FDB002C5D0E /* GenerationView.swift */,
 				CD3AE7A829849341002C5D0E /* HistoryView.swift */,
+				CD58D35229871919008D6903 /* ListHistoryView.swift */,
+				CD3AE7C22986E2BB002C5D0E /* DetailHistoryView.swift */,
 				CD3AE7AA2984938C002C5D0E /* SettingsView.swift */,
 				CD3AE7B029851A6A002C5D0E /* Settings */,
 			);
@@ -97,6 +105,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		CD3AE7BF2986D2F4002C5D0E /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				CD58D35429872243008D6903 /* Clippable.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		CD94CAEB298425DE0038C470 = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +132,7 @@
 		CD94CAF6298425DE0038C470 /* OpenAI Client */ = {
 			isa = PBXGroup;
 			children = (
+				CD3AE7BF2986D2F4002C5D0E /* Components */,
 				CD3AE7B129851AAA002C5D0E /* Model */,
 				CD3AE7AC298512CB002C5D0E /* Utils */,
 				CD3AE7AF29851A44002C5D0E /* Views */,
@@ -216,6 +233,8 @@
 				CD3AE7A329846FDB002C5D0E /* GenerationView.swift in Sources */,
 				CD3AE7A929849341002C5D0E /* HistoryView.swift in Sources */,
 				CD3AE7B729851C86002C5D0E /* LengthSettingsView.swift in Sources */,
+				CD58D35529872243008D6903 /* Clippable.swift in Sources */,
+				CD3AE7C32986E2BB002C5D0E /* DetailHistoryView.swift in Sources */,
 				CD94CAFA298425DE0038C470 /* ContentView.swift in Sources */,
 				CD3AE7A729847FBC002C5D0E /* NetworkManager.swift in Sources */,
 				CD94CAF8298425DE0038C470 /* OpenAI_ClientApp.swift in Sources */,
@@ -223,6 +242,7 @@
 				CD3AE7A52984777C002C5D0E /* PersistencyManager.swift in Sources */,
 				CD3AE7BC2985C44B002C5D0E /* HRequest.swift in Sources */,
 				CD3AE7BA298585CE002C5D0E /* Model.xcdatamodeld in Sources */,
+				CD58D35329871919008D6903 /* ListHistoryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

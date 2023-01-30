@@ -6,13 +6,17 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct HistoryView: View {
-    var requests: [HRequest] {
-        PersistencyManager.shared.loadRequests()
-    }
+    @FetchRequest(entity: Request.entity(),
+                  sortDescriptors: [NSSortDescriptor(key: "date",
+                                                     ascending: false )])
+    var requests: FetchedResults<Request>
     @State var searchField: String = ""
-    @State var path: [HRequest] = []
+    @State var path: [Request] = []
+    // @FetchRequest(entity: Request.entity(), sortDescriptors: [], predicate: .init(format: "body CONTAINS[cd] %@", searchField))
+    
     var body: some View {
         NavigationStack(path: $path) {
             List {
@@ -20,22 +24,27 @@ struct HistoryView: View {
                     Text("Your requests will be added here in the future")
                         .foregroundColor(.secondary)
                 }
-                ForEach(requests) { request in
+                ForEach(requests.filter { $0.body != nil ? searchField != "" ? $0.body!.lowercased().contains(searchField.lowercased()) : true : false }) { request in
                     NavigationLink(value: request) {
-                        Text("\( request.body )...")
+                        Text("\( request.body! )...")
                     }
                 }
             }.navigationTitle("History")
-                .searchable(text: $searchField)
-                .navigationDestination(for: HRequest.self) { request in
-                    List {
-                        ForEach(request.responses, id: \.self) { response in
-                            Text("**\(request.body)**\n\(response.trimmingCharacters(in: .whitespacesAndNewlines))")
-                        }
-                    }
+                .searchable(text: $searchField) /* {
+                    ListHistoryView(filteredBy: searchField)
+                }*/
+                .navigationDestination(for: Request.self) { request in
+                    info(for: request)
                 }
         }
     }
+    
+    func info(for request: Request) -> some View {
+        DetailHistoryView(request)
+    }
+}
+
+extension HistoryView {
 }
 
 struct HistoryView_Previews: PreviewProvider {

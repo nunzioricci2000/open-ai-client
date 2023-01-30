@@ -14,7 +14,9 @@ class NetworkManager {
     
     func perform(request: String, withToken token: String) async throws -> [String] {
         let openAi = OpenAISwift(authToken: token)
-        let response = try await openAi.sendCompletion(with: request)
+        let response = try await openAi.sendCompletion(with: request,
+                                                       model: PersistencyManager.shared.loadEngine(),
+                                                       maxTokens: PersistencyManager.shared.loadLength())
         return response.choices.map { $0.text }
     }
 }

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import OpenAISwift
+import UniformTypeIdentifiers
 
 struct GenerationView: View {
     @AppStorage("token") var token: String = "No token!"
@@ -37,7 +38,7 @@ struct GenerationView: View {
                 }
                 Section(choices.isEmpty ? "" : "Results") {
                     ForEach(choices, id: \.self) { choice in
-                        Text("**\(lastRequestText)**\(choice)").transition(.scale)
+                        Clippable(text: "\(lastRequestText)\(choice)")
                     }
                 }
             }
@@ -54,7 +55,9 @@ extension GenerationView {
         do {
             set(choices: try await NetworkManager.shared.perform(request: requestText, withToken: token))
             _ = PersistencyManager.shared.save(request: requestText, response: choices)
+            await UINotificationFeedbackGenerator().notificationOccurred(.success)
         } catch {
+            await UINotificationFeedbackGenerator().notificationOccurred(.error)
             switch error {
             case OpenAIError.genericError(let nestedError):
                 errorMessage = nestedError.localizedDescription
